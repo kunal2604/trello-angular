@@ -1,0 +1,6 @@
+<div *ngFor="let l of lists$" class="board">
+    <div class="list">
+        <h2>{{l.name}}</h2>
+        <app-cards [listId]="l.id"></app-cards>
+    </div>
+</div>

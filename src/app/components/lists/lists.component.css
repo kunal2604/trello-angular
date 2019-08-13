@@ -1,0 +1,12 @@
+.board {
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+}
+
+.list {
+    text-align: center;
+    width:400px;
+    height:200px;
+    background-color: yellow;
+}
