@@ -1,5 +1,5 @@
 .board {
-    background-color: red;
+    background-color: #4bbf6b;
     display: flex;
     flex-direction: column;
 }
@@ -7,6 +7,6 @@
 .list {
     text-align: center;
     width:400px;
-    height:200px;
-    background-color: yellow;
+    height:auto;
+    background-color:#dfe1e6;
 }

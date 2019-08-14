@@ -1,0 +1,10 @@
+<div *ngFor="let checklist of checklists" class="checklists">
+    <h2>{{checklist.name}}</h2>
+    <div *ngFor="let checkitem of checklist.checkItems">
+        <input type="checkbox">
+        <span>{{checkitem.name}} {{checkitem.state}}</span>
+        <button class="remove-item" (click)="deleteCheckitem(checkitem.id)">
+           DELETE
+        </button>
+    </div>
+</div>

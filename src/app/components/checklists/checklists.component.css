@@ -1,0 +1,15 @@
+.remove-item {
+    cursor: pointer;
+    margin-left: 14px;
+    background-color:red;
+    /* &:hover {
+        color: black;
+    } */
+}
+
+.checklists {
+    margin-bottom: 12px;
+    /* display: flex; */
+    align-items: center;
+    justify-content: space-between;
+}

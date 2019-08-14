@@ -5,12 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListsComponent } from './components/lists/lists.component';
 import { CardsComponent } from './components/cards/cards.component';
+import { ChecklistsComponent } from './components/checklists/checklists.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListsComponent,
-    CardsComponent
+    CardsComponent,
+    ChecklistsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
