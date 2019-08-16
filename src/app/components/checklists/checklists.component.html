@@ -1,3 +1,9 @@
+<h1 class="show-card-name">{{cardName}}</h1>
+<div *ngIf="showEmptyChecklist===true" class="no-checklists">  <!-- If no checklists, show error-->
+    ** No checklists **
+</div>
+
+
 <div *ngFor="let checklist of checklists" class="checklists">
     <h2>{{checklist.name}}</h2>
     <div *ngFor="let checkitem of checklist.checkItems" > 
@@ -15,7 +21,7 @@
         </button>
     </div>
     <div>
-        <input type="text">
-        <button>Add</button>
+        <input #newCheckitemInput type="text">
+        <button (click)="inputNewCheckitemName(newCheckitemInput.value); addCheckitem(checklist.id); newCheckitemInput.value=''">Add</button>
     </div>
 </div>

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GetCardsService } from '../../services/get-cards.service';
 import { ICard } from '../../interfaces/card';
-import { IcuPlaceholder } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({  
   selector: 'app-cards',
@@ -26,21 +25,23 @@ export class CardsComponent implements OnInit {
     this.newCardName = val;
   }
   addNewCard(){
-    this.newCard.name = this.newCardName;
-    this.cards.push(this.newCard);
-    
     this._getCardsService.addCard(this.listId, this.newCardName)
-      .subscribe(data => this.newCard= data);
-
-      this.newCardName = '';
+      .subscribe(data => {
+        this.newCard= data;
+        this.cards.push(this.newCard);
+        }
+      );  
   }
+  
   toggleShowAddCardDescription(){
     this.showAddCardDescription = true;
   }
 
   deleteCard(cardId){
     this.cards = this.cards.filter(card => card.id !== cardId);
+    // this.ngOnInit();
     this._getCardsService.deleteCard(cardId)
       .subscribe();
+      // this.ngOnInit();
   }
 }

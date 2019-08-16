@@ -1,3 +1,6 @@
+.show-card-name {
+    color: blue;
+}
 .remove-item {
     cursor: pointer;
     margin-left: 14px;

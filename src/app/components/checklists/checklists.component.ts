@@ -13,7 +13,11 @@ import { GetChecklistsService } from '../../services/get-checklists.service';
 export class ChecklistsComponent implements OnInit {
 
   public cardId = this.route.snapshot.paramMap.get('cardId');  // NOT +this.route.snapshot.paramMap.get(..)
+  public cardName = this.route.snapshot.paramMap.get('cardName'); // to show card-name on popup (where checklists are shown)
   checklists: IChecklist[];
+  showEmptyChecklist:boolean = false;
+  newCheckitemName:string = '';
+  newCheckitem: ICheckitem = {id: '', name: '', state: 'incomplete'};
   
   constructor(
     private route: ActivatedRoute,
@@ -23,7 +27,15 @@ export class ChecklistsComponent implements OnInit {
 
   ngOnInit() {
     this._getChecklistsService.getChecklists(this.cardId)
-      .subscribe(data => this.checklists = data);
+      .subscribe(data => this.checklists = data)
+
+    this._getChecklistsService.getChecklists(this.cardId)
+    .subscribe(data => {
+      this.checklists = data;
+      if(this.checklists.length === 0) {
+          this.showEmptyChecklist = true;
+      }
+    });
   }
 
   deleteCheckitem(checkitemId){
@@ -38,14 +50,25 @@ export class ChecklistsComponent implements OnInit {
       .subscribe();
   }
 
+  inputNewCheckitemName(val){
+    this.newCheckitemName = val;
+  }
+
+  addCheckitem(checklistId){
+    this._getChecklistsService.addCheckitem(checklistId, this.newCheckitemName)
+      .subscribe(data => {
+          this.newCheckitem = data;
+          this.checklists.map(checklist => {
+            if(checklist.id === checklistId){
+              checklist.checkItems.push(this.newCheckitem);
+            }
+          });
+      });
+  }
   updateCheckitem(checkitemId, checkitemState){
     let state = checkitemState === "complete" ? 'incomplete' : 'complete';
     console.log(state);
     this._getChecklistsService.updateCheckitem(this.cardId, checkitemId, state)
       .subscribe();
-  }
-
-  helloFriends(){
-    console.log('Hello friends');
   }
 }
