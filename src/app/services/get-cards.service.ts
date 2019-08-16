@@ -12,10 +12,13 @@ const key = '765e4970c4a31c132fd0a17307d1c75f';
 export class GetCardsService {
   constructor(private http: HttpClient) { }
   
-  getCards(listId): Observable<ICard[]> {
-    // let apiUrl = `https://api.trello.com/1/lists/5d069ad06811908dd6f6d618/cards?key=${key}&token=${token}`;
-    
+  getCards(listId: string): Observable<ICard[]> {
     let apiUrl = `https://api.trello.com/1/lists/${listId}/cards?key=${key}&token=${token}`;
     return this.http.get<ICard[]>(apiUrl);
+  }
+
+  addCard(listId: string, newCardName: string): Observable<ICard> {
+    let apiUrl = `https://api.trello.com/1/cards?name=${newCardName}&idList=${listId}&key=${key}&token=${token}`;
+    return this.http.post<ICard>(apiUrl, null);
   }
 }

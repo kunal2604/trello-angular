@@ -3,3 +3,13 @@
         <a routerLink="/checklists/{{c.id}}"> {{c.name}} </a>
     </div>
 </div>
+
+<div class="add-card">
+    <p (click)="toggleShowAddCardDescription()">+ Add another card</p>
+    <div *ngIf="showAddCardDescription" card="add-card-description">
+        <input #newCardInput type="text">
+        <br />
+        <button (click)="inputNewCardName(newCardInput.value); addNewCard(); newCardInput.value=''">Add Card</button>
+        X
+    </div>    
+</div>

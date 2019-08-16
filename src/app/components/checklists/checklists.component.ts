@@ -11,10 +11,10 @@ import { GetChecklistsService } from '../../services/get-checklists.service';
   styleUrls: ['./checklists.component.css']
 })
 export class ChecklistsComponent implements OnInit {
+
   public cardId = this.route.snapshot.paramMap.get('cardId');  // NOT +this.route.snapshot.paramMap.get(..)
   checklists: IChecklist[];
-  checkitems: ICheckitem[];
-
+  
   constructor(
     private route: ActivatedRoute,
     private location: Location,
@@ -36,5 +36,16 @@ export class ChecklistsComponent implements OnInit {
     // Delete from Trello (sending API request)
     this._getChecklistsService.deleteCheckitem(this.cardId, checkitemId)
       .subscribe();
+  }
+
+  updateCheckitem(checkitemId, checkitemState){
+    let state = checkitemState === "complete" ? 'incomplete' : 'complete';
+    console.log(state);
+    this._getChecklistsService.updateCheckitem(this.cardId, checkitemId, state)
+      .subscribe();
+  }
+
+  helloFriends(){
+    console.log('Hello friends');
   }
 }
