@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ICard } from '../interfaces/card';
 
@@ -23,8 +23,14 @@ export class GetCardsService {
   }
 
   deleteCard(cardId:string): Observable<void>{
-    console.log(cardId);
     let apiUrl = `https://api.trello.com/1/cards/${cardId}?key=${key}&token=${token}`;
     return this.http.delete<void>(apiUrl);
+  }
+
+  editCard(cardId:string, newCardName:string): Observable<void>{
+    console.log(cardId, ' ', newCardName);
+    let apiUrl = `https://api.trello.com/1/cards/${cardId}?key=${key}&token=${token}`;
+    let params = new HttpParams().set('name', newCardName);
+    return this.http.put<void>(apiUrl, null, {params});
   }
 }

@@ -62,9 +62,9 @@ export class ChecklistsComponent implements OnInit {
           });
       });
   }
+  
   updateCheckitem(checkitemId, checkitemState){
     let state = checkitemState === "complete" ? 'incomplete' : 'complete';
-    // console.log(state);
     this.checklists$.map(checklist => {
       checklist.checkItems.map(cItem => {
         if(cItem.id === checkitemId){

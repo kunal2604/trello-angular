@@ -1,7 +1,18 @@
-<div *ngFor="let c of cards$">
+<div *ngFor="let card of cards$">
     <div class="each-card">
-        <a routerLink="/checklists/{{c.id}}/{{c.name}}"> {{c.name}} </a>
-        <span (click)="deleteCard(c.id)" class="deleteCard">X..</span>
+        
+        <div *ngIf="!card.editing; else editingCard"> <!-- editing mode off-->
+            <a routerLink="/checklists/{{card.id}}/{{card.name}}"> {{card.name}} </a>
+            <span (click)="enableEditCard(card)">Edit</span>
+        </div>
+       
+        <ng-template #editingCard>   <!-- editing mode on -->
+            <div>
+                <input type="text" [(ngModel)]="card.name" (keyup.enter)="editCard(card); disableEditCard(card)" (value)="abcd">
+                <button (click)="editCard(card); disableEditCard(card)">Save</button>
+            </div>
+        </ng-template>
+        <span (click)="deleteCard(card.id)" class="deleteCard">X..</span>
     </div>
 </div>
 

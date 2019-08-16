@@ -10,10 +10,10 @@ import { ICard } from '../../interfaces/card';
 export class CardsComponent implements OnInit {
   @Input() public listId: string;
   cards$: ICard[];
-  newCard: ICard = {name: '', id: ''};
+  newCard: ICard = {name: '', id: '', editing:false};
   newCardName: string = '';
   showAddCardDescription: boolean = false;
-  
+
   constructor(private _getCardsService: GetCardsService) { }
 
   ngOnInit() {
@@ -37,6 +37,17 @@ export class CardsComponent implements OnInit {
   deleteCard(cardId){
     this.cards$ = this.cards$.filter(card => card.id !== cardId);
     this._getCardsService.deleteCard(cardId)
+      .subscribe();
+  }
+
+  enableEditCard(card: ICard): void{
+    card.editing = true;
+  }
+  disableEditCard(card: ICard): void{
+    card.editing = false;   
+  }
+  editCard(card){
+    this._getCardsService.editCard(card.id, card.name)
       .subscribe();
   }
 }

@@ -21,7 +21,7 @@
         </button>
     </div>
     <div>
-        <input #newCheckitemInput type="text">
+        <input #newCheckitemInput type="text" (keyup.enter)="inputNewCheckitemName(newCheckitemInput.value); addCheckitem(checklist.id); newCheckitemInput.value=''">
         <button (click)="inputNewCheckitemName(newCheckitemInput.value); addCheckitem(checklist.id); newCheckitemInput.value=''">Add</button>
     </div>
 </div>
