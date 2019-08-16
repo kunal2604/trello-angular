@@ -27,10 +27,8 @@ export class CardsComponent implements OnInit {
   }
   addNewCard(){
     this.newCard.name = this.newCardName;
-    this.newCard.id = 'somerandomid';
     this.cards.push(this.newCard);
     
-
     this._getCardsService.addCard(this.listId, this.newCardName)
       .subscribe(data => this.newCard= data);
 
@@ -38,5 +36,11 @@ export class CardsComponent implements OnInit {
   }
   toggleShowAddCardDescription(){
     this.showAddCardDescription = true;
+  }
+
+  deleteCard(cardId){
+    this.cards = this.cards.filter(card => card.id !== cardId);
+    this._getCardsService.deleteCard(cardId)
+      .subscribe();
   }
 }

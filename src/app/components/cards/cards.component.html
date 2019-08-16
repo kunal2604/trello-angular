@@ -1,6 +1,7 @@
 <div *ngFor="let c of cards">
     <div class="each-card">
         <a routerLink="/checklists/{{c.id}}"> {{c.name}} </a>
+        <span (click)="deleteCard(c.id)" class="deleteCard">X..</span>
     </div>
 </div>
 

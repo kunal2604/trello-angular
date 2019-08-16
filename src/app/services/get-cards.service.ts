@@ -21,4 +21,10 @@ export class GetCardsService {
     let apiUrl = `https://api.trello.com/1/cards?name=${newCardName}&idList=${listId}&key=${key}&token=${token}`;
     return this.http.post<ICard>(apiUrl, null);
   }
+
+  deleteCard(cardId:string): Observable<void>{
+    console.log(cardId);
+    let apiUrl = `https://api.trello.com/1/cards/${cardId}?key=${key}&token=${token}`;
+    return this.http.delete<void>(apiUrl);
+  }
 }
