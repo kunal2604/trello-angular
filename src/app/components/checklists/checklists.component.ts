@@ -13,7 +13,9 @@ import { GetChecklistsService } from '../../services/get-checklists.service';
 export class ChecklistsComponent implements OnInit {
 
   public cardId = this.route.snapshot.paramMap.get('cardId');  // NOT +this.route.snapshot.paramMap.get(..)
+  public cardName = this.route.snapshot.paramMap.get('cardName'); // to show card-name on popup (where checklists are shown)
   checklists: IChecklist[];
+  showEmptyChecklist:boolean = false;
   
   constructor(
     private route: ActivatedRoute,
@@ -23,7 +25,15 @@ export class ChecklistsComponent implements OnInit {
 
   ngOnInit() {
     this._getChecklistsService.getChecklists(this.cardId)
-      .subscribe(data => this.checklists = data);
+      .subscribe(data => this.checklists = data)
+
+    this._getChecklistsService.getChecklists(this.cardId)
+    .subscribe(data => {
+      this.checklists = data;
+      if(this.checklists.length === 0) {
+          this.showEmptyChecklist = true;
+      }
+    });
   }
 
   deleteCheckitem(checkitemId){

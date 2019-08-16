@@ -3,6 +3,7 @@ export interface IChecklist {
     name: string;
     checkItems: any;
     idCard: string;
+    idList: string;
 }
 
 // checkitem: []    DOUBT

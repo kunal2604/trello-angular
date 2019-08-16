@@ -1,16 +1,16 @@
 <div *ngFor="let c of cards">
     <div class="each-card">
-        <a routerLink="/checklists/{{c.id}}"> {{c.name}} </a>
+        <a routerLink="/checklists/{{c.id}}/{{c.name}}"> {{c.name}} </a>
         <span (click)="deleteCard(c.id)" class="deleteCard">X..</span>
     </div>
 </div>
 
 <div class="add-card">
     <p (click)="toggleShowAddCardDescription()">+ Add another card</p>
-    <div *ngIf="showAddCardDescription" card="add-card-description">
+    <div *ngIf="showAddCardDescription">
         <input #newCardInput type="text">
         <br />
-        <button (click)="inputNewCardName(newCardInput.value); addNewCard(); newCardInput.value=''">Add Card</button>
+        <button (click)="inputNewCardName(newCardInput.value); addNewCard(); newCardInput.value='' ">Add Card</button>
         X
     </div>    
 </div>

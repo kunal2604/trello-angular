@@ -11,7 +11,7 @@ export class ListsComponent implements OnInit {
 
   constructor(private _getListsService: GetListsService) { }
   lists$: IList[];
-
+  showAddNewList: boolean = false;
   ngOnInit() {
     this._getListsService.getLists()
       .subscribe(data => this.lists$ = data);
