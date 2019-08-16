@@ -27,9 +27,6 @@ export class ChecklistsComponent implements OnInit {
 
   ngOnInit() {
     this._getChecklistsService.getChecklists(this.cardId)
-      .subscribe(data => this.checklists = data)
-
-    this._getChecklistsService.getChecklists(this.cardId)
     .subscribe(data => {
       this.checklists = data;
       if(this.checklists.length === 0) {
@@ -67,7 +64,17 @@ export class ChecklistsComponent implements OnInit {
   }
   updateCheckitem(checkitemId, checkitemState){
     let state = checkitemState === "complete" ? 'incomplete' : 'complete';
-    console.log(state);
+    // console.log(state);
+    this.checklists.map(checklist => {
+      checklist.checkItems.map(cItem => {
+        if(cItem.id === checkitemId){
+          if(checkitemState === 'complete')
+            cItem.state = 'incomplete';
+          else
+            cItem.state = 'complete';
+        }
+      })
+    })
     this._getChecklistsService.updateCheckitem(this.cardId, checkitemId, state)
       .subscribe();
   }

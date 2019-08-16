@@ -10,9 +10,9 @@
         <input 
             type="checkbox" 
             [checked]="checkitem.state === 'complete' ? true : false" 
-            (change)="updateCheckitem(checkitem.id, checkitem.state); helloFriends()"
+            (change)="updateCheckitem(checkitem.id, checkitem.state)"
         >
-        <span [ngClass]="{'completed': checkitem.state === 'complete' ? true : false}">{{checkitem.name}} {{checkitem.state}}</span>
+        <span [ngClass]="{'completed': checkitem.state === 'complete' ? true : false}">{{checkitem.name}}</span>
         <button 
             class="remove-item" 
             (click)="deleteCheckitem(checkitem.id)"
