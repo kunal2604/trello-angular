@@ -5,6 +5,10 @@
     </div>
 </div>
 
-<div class="addList">
+<div (click)="showAddNewList = true" class="addList">
    + Add another list
+   <div *ngIf="showAddNewList === true">
+       <input [(ngModel)]="newListName" #newListInput type="text">
+       <span (click)="addList(); newListInput.value=''">Add</span>
+   </div>
 </div>

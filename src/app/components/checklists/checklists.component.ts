@@ -14,7 +14,7 @@ export class ChecklistsComponent implements OnInit {
 
   public cardId = this.route.snapshot.paramMap.get('cardId');  // NOT +this.route.snapshot.paramMap.get(..)
   public cardName = this.route.snapshot.paramMap.get('cardName'); // to show card-name on popup (where checklists are shown)
-  checklists: IChecklist[];
+  checklists$: IChecklist[];
   showEmptyChecklist:boolean = false;
   newCheckitemName:string = '';
   newCheckitem: ICheckitem = {id: '', name: '', state: 'incomplete'};
@@ -28,8 +28,8 @@ export class ChecklistsComponent implements OnInit {
   ngOnInit() {
     this._getChecklistsService.getChecklists(this.cardId)
     .subscribe(data => {
-      this.checklists = data;
-      if(this.checklists.length === 0) {
+      this.checklists$ = data;
+      if(this.checklists$.length === 0) {
           this.showEmptyChecklist = true;
       }
     });
@@ -37,7 +37,7 @@ export class ChecklistsComponent implements OnInit {
 
   deleteCheckitem(checkitemId){
     // Delete from view
-    this.checklists.map(checklist => {
+    this.checklists$.map(checklist => {
       checklist.checkItems = checklist.checkItems.filter(cItem =>
         cItem.id !== checkitemId
       );
@@ -55,7 +55,7 @@ export class ChecklistsComponent implements OnInit {
     this._getChecklistsService.addCheckitem(checklistId, this.newCheckitemName)
       .subscribe(data => {
           this.newCheckitem = data;
-          this.checklists.map(checklist => {
+          this.checklists$.map(checklist => {
             if(checklist.id === checklistId){
               checklist.checkItems.push(this.newCheckitem);
             }
@@ -65,7 +65,7 @@ export class ChecklistsComponent implements OnInit {
   updateCheckitem(checkitemId, checkitemState){
     let state = checkitemState === "complete" ? 'incomplete' : 'complete';
     // console.log(state);
-    this.checklists.map(checklist => {
+    this.checklists$.map(checklist => {
       checklist.checkItems.map(cItem => {
         if(cItem.id === checkitemId){
           if(checkitemState === 'complete')

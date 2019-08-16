@@ -4,7 +4,7 @@
 </div>
 
 
-<div *ngFor="let checklist of checklists" class="checklists">
+<div *ngFor="let checklist of checklists$" class="checklists">
     <h2>{{checklist.name}}</h2>
     <div *ngFor="let checkitem of checklist.checkItems" > 
         <input 
