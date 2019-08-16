@@ -21,9 +21,6 @@ export class CardsComponent implements OnInit {
       .subscribe(data => this.cards$ = data);
   }
 
-  inputNewCardName(val){
-    this.newCardName = val;
-  }
   addNewCard(){
     this._getCardsService.addCard(this.listId, this.newCardName)
       .subscribe(data => {
@@ -39,9 +36,7 @@ export class CardsComponent implements OnInit {
 
   deleteCard(cardId){
     this.cards$ = this.cards$.filter(card => card.id !== cardId);
-    // this.ngOnInit();
     this._getCardsService.deleteCard(cardId)
       .subscribe();
-      // this.ngOnInit();
   }
 }
