@@ -36,15 +36,14 @@ export class ChecklistsComponent implements OnInit {
   }
 
   deleteCheckitem(checkitemId){
-    // Delete from view
-    this.checklists$.map(checklist => {
-      checklist.checkItems = checklist.checkItems.filter(cItem =>
-        cItem.id !== checkitemId
-      );
-    });
-    // Delete from Trello (sending API request)
     this._getChecklistsService.deleteCheckitem(this.cardId, checkitemId)
-      .subscribe();
+      .subscribe(() => {
+        this.checklists$.map(checklist => {
+          checklist.checkItems = checklist.checkItems.filter(checkItem => 
+              checkItem.id !== checkitemId
+            );
+        })
+      });
   }
 
   inputNewCheckitemName(val){
@@ -53,10 +52,10 @@ export class ChecklistsComponent implements OnInit {
 
   addCheckitem(checklistId){
     this._getChecklistsService.addCheckitem(checklistId, this.newCheckitemName)
-      .subscribe(data => {
+      .subscribe(data => {   // delete from rendering
           this.newCheckitem = data;
           this.checklists$.map(checklist => {
-            if(checklist.id === checklistId){
+            if(checklist.id === checklistId){ 
               checklist.checkItems.push(this.newCheckitem);
             }
           });
