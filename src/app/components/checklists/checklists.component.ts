@@ -64,14 +64,15 @@ export class ChecklistsComponent implements OnInit {
   
   updateCheckitem(checkitemId, checkitemState){
     let state = checkitemState === "complete" ? 'incomplete' : 'complete';
-    this.checklists$.map(checklist => {
-      checklist.checkItems.map(cItem => {
-        if(cItem.id === checkitemId){
-          cItem.state = checkitemState === 'complete' ? 'incomplete' : 'complete'
-        }
-      })
-    })
     this._getChecklistsService.updateCheckitem(this.cardId, checkitemId, state)
-      .subscribe();
+      .subscribe(() => {
+        this.checklists$.map(checklist => {
+          checklist.checkItems.map(cItem => {
+            if(cItem.id === checkitemId){
+              cItem.state = checkitemState === 'complete' ? 'incomplete' : 'complete'
+            }
+          })
+        })
+      });
   }
 }
