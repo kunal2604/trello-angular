@@ -20,8 +20,8 @@ export class CardsComponent implements OnInit {
       .subscribe(data => this.cards$ = data);
   }
 
-  addNewCard(){
-    this._getCardsService.addCard(this.listId, this.newCard.name)
+  addNewCard(newCardName){
+    this._getCardsService.addCard(this.listId, newCardName)
       .subscribe(data => {
         this.newCard= data;
         this.cards$.push(this.newCard);
@@ -47,6 +47,6 @@ export class CardsComponent implements OnInit {
   }
   editCard(card){
     this._getCardsService.editCard(card.id, card.name)
-      .subscribe();
+      .subscribe(() => this.disableEditCard(card));
   }
 }

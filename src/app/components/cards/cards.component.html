@@ -8,8 +8,8 @@
        
         <ng-template #editingCard>   <!-- editing mode on -->
             <div class="edit-mode-on">
-                <input type="text" [(ngModel)]="card.name" (keyup.enter)="editCard(card); disableEditCard(card)" (value)="abcd">
-                <button (click)="editCard(card); disableEditCard(card)">Save</button>
+                <input #editCardInput type="text" [(ngModel)]="card.name" (keyup.enter)="editCard(card)">
+                <button (click)="editCard(card)">Save</button>
             </div>
         </ng-template>
     </div>
@@ -19,8 +19,8 @@
     <button (click)="toggleShowAddCardDescription()">+ Add another card</button>
 
     <div *ngIf="showAddCardDescription">
-        <input #newCardInput [(ngModel)]="newCard.name" type="text">
+        <input #newCardInput type="text">
         <br />
-        <button (click)="addNewCard(); newCardInput.value='' ">Add Card</button>
+        <button (click)="addNewCard(newCardInput.value); newCardInput.value=''; toggleShowAddCardDescription()">Add Card</button>
     </div>    
 </div>
