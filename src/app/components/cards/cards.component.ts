@@ -11,7 +11,6 @@ export class CardsComponent implements OnInit {
   @Input() public listId: string;
   cards$: ICard[];
   newCard: ICard = {name: '', id: '', editing:false};
-  newCardName: string = '';
   showAddCardDescription: boolean = false;
 
   constructor(private _getCardsService: GetCardsService) { }
@@ -22,7 +21,7 @@ export class CardsComponent implements OnInit {
   }
 
   addNewCard(){
-    this._getCardsService.addCard(this.listId, this.newCardName)
+    this._getCardsService.addCard(this.listId, this.newCard.name)
       .subscribe(data => {
         this.newCard= data;
         this.cards$.push(this.newCard);

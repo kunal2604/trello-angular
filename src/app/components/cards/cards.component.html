@@ -18,8 +18,9 @@
 
 <div class="add-card">
     <p (click)="toggleShowAddCardDescription()">+ Add another card</p>
+
     <div *ngIf="showAddCardDescription">
-        <input #newCardInput [(ngModel)]="newCardName" type="text">
+        <input #newCardInput [(ngModel)]="newCard.name" type="text">
         <br />
         <button (click)="addNewCard(); newCardInput.value='' ">Add Card</button>
         X
