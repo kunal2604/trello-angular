@@ -1,7 +1,18 @@
-a {
-    color: orange;
+.card-border{
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: burlywood;
+    width: auto;
+    height: auto;
 }
 
-.each-card {
-    background-color: white;
+.card-name{
+    text-align: center;
+}
+.edit-mode-on{
+    text-align: center;
+}
+
+.the-cards{
+    margin-top: 2px;
 }

@@ -1,12 +1,36 @@
-.board {
-    background-color: #4bbf6b;
-    display: flex;
-    flex-direction: column;
+.container {
+    background-color: #349934;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    height: auto;
 }
 
-.list {
+.view {
+    display: inline-block;
+    margin: 0.3%;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+    width: 20%;
+    background-color:#2229;
     text-align: center;
-    width:400px;
-    height:auto;
-    background-color:#dfe1e6;
+    font-size: 20px;
+    color: white;
+    white-space: normal;
+}
+
+.list-view{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: 0.3%;
+    padding-left: 0.5%;
+    padding-right: 0.5%;    
+}
+
+.card-container{
+    background-color: aquamarine;
+    color: red;
+    text-align: justify;
+    white-space: normal;
 }

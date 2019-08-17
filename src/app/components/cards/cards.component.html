@@ -1,28 +1,26 @@
-<div *ngFor="let card of cards$">
+<div *ngFor="let card of cards$" class="theCards">
     <div class="each-card">
-        
-        <div *ngIf="!card.editing; else editingCard"> <!-- editing mode off-->
-            <a routerLink="/checklists/{{card.id}}/{{card.name}}"> {{card.name}} </a>
-            <span (click)="enableEditCard(card)">Edit</span>
+        <div *ngIf="!card.editing; else editingCard" class="card-name"> <!-- editing mode off-->
+            <h3 class="card-border"><a routerLink="/checklists/{{card.id}}/{{card.name}}"> {{card.name}} </a></h3>
+            <button (click)="enableEditCard(card)">Edit</button>
+            <button (click)="deleteCard(card.id)" class="deleteCard">X</button>
         </div>
        
         <ng-template #editingCard>   <!-- editing mode on -->
-            <div>
+            <div class="edit-mode-on">
                 <input type="text" [(ngModel)]="card.name" (keyup.enter)="editCard(card); disableEditCard(card)" (value)="abcd">
                 <button (click)="editCard(card); disableEditCard(card)">Save</button>
             </div>
         </ng-template>
-        <span (click)="deleteCard(card.id)" class="deleteCard">X..</span>
     </div>
 </div>
 
 <div class="add-card">
-    <p (click)="toggleShowAddCardDescription()">+ Add another card</p>
+    <button (click)="toggleShowAddCardDescription()">+ Add another card</button>
 
     <div *ngIf="showAddCardDescription">
         <input #newCardInput [(ngModel)]="newCard.name" type="text">
         <br />
         <button (click)="addNewCard(); newCardInput.value='' ">Add Card</button>
-        X
     </div>    
 </div>

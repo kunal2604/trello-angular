@@ -1,14 +1,22 @@
-<div *ngFor="let l of lists$" class="board">
-    <div class="list">
-        <h2>{{l.name}}</h2>
-        <app-cards [listId]="l.id"></app-cards>
-    </div>
-</div>
-
-<div (click)="showAddNewList = true" class="addList">
-   + Add another list
-   <div *ngIf="showAddNewList === true">
-       <input [(ngModel)]="newListName" #newListInput type="text">
-       <span (click)="addList(); newListInput.value=''">Add</span>
-   </div>
+<div class="container">
+        <div *ngFor="let l of lists$" class="view">
+            <div class="list" class="list-view"> 
+                <h4>{{l.name}}</h4>
+                <div class="card-container">
+                    <div class="card-view">
+                        <app-cards [listId]="l.id"></app-cards>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        <div (click)="showAddNewList = true" class="addList">
+            + Add another list
+            <div *ngIf="showAddNewList === true">
+                <input [(ngModel)]="newListName" #newListInput type="text">
+                <span (click)="addList(); newListInput.value=''">Add</span>
+            </div>
+        </div>
+        
+        
 </div>
