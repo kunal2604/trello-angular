@@ -27,11 +27,11 @@ export class ChecklistsComponent implements OnInit {
 
   ngOnInit() {
     this._getChecklistsService.getChecklists(this.cardId)
-    .subscribe(data => {
-      this.checklists$ = data;
-      if(this.checklists$.length === 0) {
+      .subscribe(data => {
+        this.checklists$ = data;
+        if(this.checklists$.length === 0) {
           this.showEmptyChecklist = true;
-      }
+        }
     });
   }
 
@@ -67,10 +67,7 @@ export class ChecklistsComponent implements OnInit {
     this.checklists$.map(checklist => {
       checklist.checkItems.map(cItem => {
         if(cItem.id === checkitemId){
-          if(checkitemState === 'complete')
-            cItem.state = 'incomplete';
-          else
-            cItem.state = 'complete';
+          cItem.state = checkitemState === 'complete' ? 'incomplete' : 'complete'
         }
       })
     })
